@@ -1,0 +1,13 @@
+.button-link {
+  background-color: transparent;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.button-link:hover,
+.button-link:focus {
+  color: #fff;
+  font-weight: bold;
+  background-color: #072c54;
+  border-radius: 4px;
+}

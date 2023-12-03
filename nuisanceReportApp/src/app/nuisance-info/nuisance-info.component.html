@@ -1,0 +1,63 @@
+<div class="d-flex justify-content-center mt-4 mb-4">
+  <div class="border shadow rounded bg-warning-subtle p-3 w-50">
+    <div *ngIf="nuisance" class="card mb-2 shadow p-3 w-100">
+      <div class="row">
+        <div class="col-md-4 d-flex align-items-center justify-content-center">
+          <span
+            *ngIf="nuisance.pictureUrl; then uploadedImage; else default"
+          ></span>
+          <ng-template #uploadedImage>
+            <img
+              [src]="nuisance.pictureUrl"
+              class="img-fluid rounded"
+              alt="Baddie's image"
+            />
+          </ng-template>
+          <ng-template #default>
+            <h6 class="no-image">
+              No image available
+              <i class="bi bi-ban circle-image"></i>
+            </h6>
+          </ng-template>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <p>
+              <strong>Baddie's Name: </strong>{{ nuisance.troublemakerName }}
+            </p>
+            <p><strong>Location: </strong>{{ nuisance.location.placeName }}</p>
+            <p>
+              <strong>Reported by: </strong>{{ nuisance.reporterName }} ({{
+                formatPhoneNumber(nuisance.reporterPhone)
+              }})
+            </p>
+            <p>
+              <strong>Time: </strong
+              >{{ nuisance.timeReported | formatDateTime }}
+            </p>
+            <p>
+              <strong>Status: </strong>
+              <span
+                [ngClass]="{
+                  'text-danger': nuisance.status === 'OPEN',
+                  'text-success': nuisance.status !== 'OPEN'
+                }"
+                >{{ nuisance.status }}
+              </span>
+              <a
+                class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover link-hover"
+                (click)="toggleStatus()"
+              >
+                CHANGE
+              </a>
+            </p>
+            <p><strong>Extra Info: </strong>{{ nuisance.extraInfo }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <button class="btn btn-primary w-100 mt-2" [routerLink]="['/nuisance']">
+      GO BACK TO MAIN
+    </button>
+  </div>
+</div>

@@ -1,0 +1,231 @@
+<div class="d-flex justify-content-center mb-4">
+  <div class="border shadow rounded bg-success-subtle p-3">
+    <h5>Report <i class="bi bi-info-circle"></i></h5>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-floating mb-2">
+        <input
+          type="text"
+          class="form-control"
+          id="reporterName"
+          name="name"
+          placeholder="Enter your name..."
+          formControlName="reporterName"
+        />
+        <label for="reporterName">
+          <i class="bi bi-person"></i>
+          Enter your name...
+        </label>
+        <div
+          *ngIf="
+            form.controls['reporterName'].invalid &&
+            form.controls['reporterName'].touched
+          "
+          class="text-danger warning-msg"
+        >
+          Name is required.
+        </div>
+      </div>
+      <div class="form-floating mb-2">
+        <input
+          type="tel"
+          class="form-control"
+          id="reporterPhone"
+          name="phone"
+          placeholder="Enter your phone number..."
+          formControlName="reporterPhone"
+        />
+        <label for="reporterPhone">
+          <i class="bi bi-telephone"></i>
+          Enter your 10-digit phone number...
+        </label>
+        <div
+          *ngIf="form.controls['reporterPhone'].errors?.['required'] && form.controls['reporterPhone'].touched"
+          class="text-danger warning-msg"
+        >
+          Phone number is required.
+        </div>
+        <div
+          *ngIf="form.controls['reporterPhone'].errors?.['pattern'] && form.controls['reporterPhone'].touched"
+          class="text-danger warning-msg"
+        >
+          Phone number must be in 10-digit.
+        </div>
+      </div>
+      <div class="form-floating mb-2">
+        <input
+          type="text"
+          class="form-control"
+          id="troublemakerName"
+          name="troublemakerName"
+          placeholder="Enter the baddie's name..."
+          formControlName="troublemakerName"
+        />
+        <label for="troublemakerName">
+          <i class="bi bi-emoji-frown"></i>
+          Enter the baddie's name...
+        </label>
+        <div
+          *ngIf="
+            form.controls['troublemakerName'].invalid &&
+            form.controls['troublemakerName'].touched
+          "
+          class="text-danger warning-msg"
+        >
+          Baddie's name is required.
+        </div>
+      </div>
+      <div class="mb-2" formGroupName="location">
+        <select
+          class="form-select dropdown-height"
+          id="placeName"
+          formControlName="selectedLocation"
+          (change)="onSelectLocation($event)"
+        >
+          <option value="" disabled>Select an existing location</option>
+          <option disabled>──────────</option>
+          <option value="Type your location...">
+            Select to create a location...
+          </option>
+          <option disabled>──────────</option>
+          <option
+            *ngFor="let location of existingLocations"
+            [value]="location.placeName"
+          >
+            {{ location.placeName }}
+          </option>
+        </select>
+        <div
+          *ngIf="
+            selectedLocation !== 'Type your location...' &&
+            form.get('location.placeName')?.invalid &&
+            form.get('location.placeName')?.touched
+          "
+          class="text-danger warning-msg"
+        >
+          Either select an existing location or create a new location.
+        </div>
+      </div>
+      <div
+        *ngIf="selectedLocation === 'Type your location...'"
+        class="row g-2"
+        formGroupName="location"
+      >
+        <div class="col">
+          <div class="form-floating mb-2">
+            <input
+              type="text"
+              class="form-control"
+              id="placeName"
+              name="placeName"
+              placeholder="Location"
+              formControlName="placeName"
+            />
+            <label for="placeName">
+              <i class="bi bi-geo-alt"></i>
+              Location
+            </label>
+            <div
+              *ngIf="
+                form.get('location.placeName')?.invalid &&
+                form.get('location.placeName')?.touched
+              "
+              class="text-danger warning-msg"
+            >
+              Location is required.
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-2">
+            <input
+              type="number"
+              class="form-control"
+              id="latitude"
+              name="latitude"
+              placeholder="latitude"
+              formControlName="latitude"
+            />
+            <label for="latitude">
+              <i class="bi bi-globe-americas"></i>
+              latitude
+            </label>
+            <div
+              *ngIf="
+                form.get('location.latitude')?.invalid &&
+                form.get('location.latitude')?.touched
+              "
+              class="text-danger warning-msg"
+            >
+              Latitude is required.
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="form-floating mb-2">
+            <input
+              type="number"
+              class="form-control"
+              id="longitude"
+              name="longitude"
+              placeholder="longitude"
+              formControlName="longitude"
+            />
+            <label for="longitude">
+              <i class="bi bi-globe-americas"></i>
+              longitude
+            </label>
+            <div
+              *ngIf="
+                form.get('location.longitude')?.invalid &&
+                form.get('location.longitude')?.touched
+              "
+              class="text-danger warning-msg"
+            >
+              Longitude is required.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-floating mb-2">
+        <input
+          type="text"
+          class="form-control"
+          id="pictureUrl"
+          name="pictureUrl"
+          placeholder="Optional imageURL"
+          formControlName="pictureUrl"
+        />
+        <label for="pictureUrl">
+          <i class="bi bi-image"></i>
+          ImageURL (optional)
+        </label>
+      </div>
+      <div class="form-floating mb-2">
+        <textarea
+          class="form-control extra-info"
+          id="extraInfo"
+          name="extraInfo"
+          placeholder="Extra infomation..."
+          formControlName="extraInfo"
+        ></textarea>
+        <label for="extraInfo">
+          <i class="bi bi-chat-square-text"></i>
+          Extra information...
+        </label>
+        <div
+          *ngIf="
+            form.controls['extraInfo'].invalid &&
+            form.controls['extraInfo'].touched
+          "
+          class="text-danger warning-msg"
+        >
+          Extra information is required.
+        </div>
+      </div>
+      <button class="btn btn-warning w-100">SAVE</button>
+    </form>
+    <button class="btn btn-primary w-100 mt-2" [routerLink]="['/nuisance']">
+      GO BACK TO MAIN
+    </button>
+  </div>
+</div>

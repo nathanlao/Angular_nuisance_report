@@ -1,0 +1,24 @@
+<td>{{ nuisance.location.placeName }}</td>
+<td>{{ nuisance.troublemakerName }}</td>
+<td>{{ nuisance.timeReported | formatDateTime }}</td>
+<td
+  [ngClass]="{
+    'text-danger': nuisance.status === 'OPEN',
+    'text-success': nuisance.status !== 'OPEN'
+  }"
+>
+  {{ nuisance.status }}
+</td>
+<td>
+  <a
+    class="link-primary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover link-hover"
+    (click)="onView()"
+  >
+    MORE INFO
+  </a>
+</td>
+<td>
+  <button class="delete-button" (click)="onDelete($event, nuisance.id)">
+    <i class="bi bi-x-square-fill delete-icon-red"></i>
+  </button>
+</td>

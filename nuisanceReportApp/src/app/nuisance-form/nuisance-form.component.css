@@ -1,0 +1,18 @@
+.warning-msg {
+  font-size: 0.8em;
+}
+
+.extra-info {
+  height: 100px;
+}
+
+.dropdown-height {
+  /* width: 213px; */
+  height: 57px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.form-select {
+  min-width: 700px;
+}

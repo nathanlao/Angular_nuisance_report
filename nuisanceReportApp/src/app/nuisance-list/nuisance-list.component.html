@@ -1,0 +1,68 @@
+<div class="d-flex">
+  <div class="p-2 ms-2 me-1">
+    <app-nuisance-map [nuisances]="nuisances"></app-nuisance-map>
+  </div>
+  <div class="p-2 w-100">
+    <table class="table table-hover border shadow rounded">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">
+            <button
+              id="locationSortButton"
+              class="button-link"
+              (click)="onLocationSort()"
+            >
+              <strong>
+                Location 
+                <i class="bi bi-sort-alpha-down"></i>
+              </strong>
+            </button>
+          </th>
+          <th scope="col">
+            <button
+              id="nameSortButton"
+              class="button-link"
+              (click)="onNameSort()"
+            >
+              <strong>
+                Baddie's Name
+                <i class="bi bi-sort-alpha-down"></i>
+              </strong>
+            </button>
+          </th>
+          <th scope="col">
+            <button
+              id="timeSortButton"
+              class="button-link"
+              (click)="onTimeSort()"
+            >
+              <strong>
+                Time Reported
+                <i class="bi bi-sort-numeric-down"></i>
+              </strong>
+            </button>
+          </th>
+          <th scope="col">Status</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let nuisance of nuisances">
+          <tr
+            app-nuisance
+            [nuisance]="nuisance"
+            (delete)="onNuisanceDelete($event)"
+          ></tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <button
+      type="button"
+      class="btn btn-primary w-100 border shadow rounded"
+      [routerLink]="['/nuisance/add']"
+    >
+      CREATE NUISANCE REPORT
+    </button>
+  </div>
+</div>

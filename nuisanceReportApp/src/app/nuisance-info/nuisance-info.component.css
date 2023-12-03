@@ -1,0 +1,23 @@
+.card {
+  min-height: 350px;
+}
+
+.card-body {
+  padding: 0.6rem;
+}
+
+.card-body p {
+  margin-bottom: 0.9rem;
+}
+
+.link-hover:hover {
+  cursor: pointer;
+}
+
+.no-image {
+  font-size: 0.7rem;
+}
+
+.circle-image {
+  color: red;
+}
